@@ -47,7 +47,7 @@ clear
 if [ "$?" -gt "0" ];
   then
     echo -e "${RED}Not all required packages were installed properly. Try to install them manually by running the following commands:${NC}\n"
-        echo "apt-get update"
+        echo "apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade"
     echo "apt -y install software-properties-common"
     echo "apt-add-repository -y ppa:bitcoin/bitcoin"
     echo "apt-get update"
