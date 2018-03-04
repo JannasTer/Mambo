@@ -81,11 +81,16 @@ cd $TMP_FOLDER
 echo -e "Clone git repo and compile it. This may take some time. Press a key to continue."
 read -n 1 -s -r -p ""
 git clone https://github.com/MamboCoin/MamboCoin
-cd MamboCoin/src/
+cd MamboCoin/src/leveldb
+make clean
+make libmemenv.a libleveldb.a
+cd MamboCoin/src
 make -f makefile.unix
 compile_error MamboCoin
 
-cp -a $DEFAULTMAMBOBINARY /usr/local/bin
+strip $DEFAULTMAMBOBINARY
+chmod 755 $DEFAULTMAMBOBINARY
+mv $DEFAULTMAMBOBINARY /usr/bin/$DEFAULTMAMBOBINARY
 clear
 }
 
@@ -104,8 +109,8 @@ cat << EOF > /etc/systemd/system/$DEFAULTMAMBOBINARY.service
 Description=Mambocoin service
 After=network.target
 [Service]
-ExecStart=/usr/local/bin/$DEFAULTMAMBOBINARY -conf=$MAMBOCOINFOLDER/$DEFAULTCONFFILE -datadir=$MAMBOCOINFOLDER
-ExecStop=/usr/local/bin/$DEFAULTMAMBOBINARY -conf=$MAMBOCOINFOLDER/$DEFAULTCONFFILE -datadir=$MAMBOCOINFOLDER stop
+ExecStart=/usr/bin/$DEFAULTMAMBOBINARY -conf=$MAMBOCOINFOLDER/$DEFAULTCONFFILE -datadir=$MAMBOCOINFOLDER
+ExecStop=/usr/bin/$DEFAULTMAMBOBINARY -conf=$MAMBOCOINFOLDER/$DEFAULTCONFFILE -datadir=$MAMBOCOINFOLDER stop
 Restart=on-abort
 User=$MAMBOCOINUSER
 Group=$MAMBOCOINUSER
@@ -152,7 +157,7 @@ chown -R $MAMBOCOINUSER: $MAMBOCOINFOLDER >/dev/null
 read -p "MAMBOCOIN Port: " -i $DEFAULTMAMBOCOINPORT -e MAMBOCOINPORT
 : ${MAMBOCOINPORT:=$DEFAULTMAMBOCOINPORT}
 
-echo -e "Enter your ${RED}Masternode Private Key${NC}. Leave it blank to generate a new ${RED}Masternode Private Key${NC} for you:"
+echo -e "Enter your ${RED}Masternode Private Key${NC}. You will get it in your MamboCoin Cold wallet. Click on ${GREEN}MamboNodes${NC} tab then ${GREEN}My MamboNodes${NC} tab, click on ${GREEN}Get Config${NC} and paste the ${RED}Masternode Private Key${NC} here."
 read -e MAMBOCOINKEY
 if [[ -z "$MAMBOCOINKEY" ]]; then
  sudo -u $MAMBOCOINUSER /usr/local/bin/$DEFAULTMAMBOBINARY -conf=$MAMBOCOINFOLDER/$DEFAULTCONFFILE -datadir=$MAMBOCOINFOLDER
