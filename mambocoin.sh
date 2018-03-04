@@ -4,7 +4,6 @@ DEFAULTMAMBOCOINUSER="mambocoin"
 DEFAULTMAMBOCOINPORT=21410
 DEFAULTCONFFILE="MamboCoin.conf"
 DEFAULTMAMBOBINARY="mambocoind"
-TMP_FOLDER=$(mktemp -d)
 
 function compile_error() {
 if [ "$?" -gt "0" ];
@@ -77,7 +76,6 @@ clear
 
 function compile_mambocoin() {
 
-cd $TMP_FOLDER
 echo -e "Clone git repo and compile it. This may take some time. Press a key to continue."
 read -n 1 -s -r -p ""
 git clone https://github.com/MamboCoin/MamboCoin
