@@ -5,7 +5,6 @@ Shell script to install a [MamboCoin Masternode](http://mambocoin.com) on a Linu
 
 ## Desktop wallet setup  
 
-After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps:
 1.  Synchronize your local wallet.
 2.  Open the MamboCoin Desktop Wallet.  
 3.  Go to **MamboNodes** tab click on **My MamboNodes**
@@ -30,6 +29,8 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 ***
 
 ## VPS Setup:  
+
+After the Cold Wallet is up and running, you need to configure the VPS accordingly. Here are the steps:
 
 wget -q https://raw.githubusercontent.com/JannasTer/Mambo/master/mambocoin.sh
 
