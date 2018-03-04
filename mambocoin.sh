@@ -22,7 +22,7 @@ if [[ $(lsb_release -d) != *16.04* ]]; then
 fi
 
 if [[ $EUID -ne 0 ]]; then
-   echo -e "${RED}$0 must be run as root.${NC}" 
+   echo -e "${RED}$0 must be run as root.${NC}"
    exit 1
 fi
 
@@ -34,7 +34,7 @@ fi
 
 function prepare_system() {
 
-echo -e "Prepare the system to install MamboCoin Master Node."
+echo -e "Prepare the system to install MamboCoin MasterNode."
 apt-get update >/dev/null 2>&1
 apt install -y software-properties-common >/dev/null 2>&1
 echo -e "${GREEN}Adding bitcoin PPA repository"
@@ -54,7 +54,7 @@ if [ "$?" -gt "0" ];
     echo "apt-get update"
     echo "apt install -y make build-essential libtool software-properties-common autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev \
 libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git curl libdb4.8-dev \
-bsdmainutils libdb4.8++-dev libminiupnpc-dev pwgen" 
+bsdmainutils libdb4.8++-dev libminiupnpc-dev pwgen"
  exit 1
 fi
 
@@ -130,10 +130,18 @@ checks
 prepare_system
 compile_mambocoin
 
+echo -e "Set a password for ${RED}$MAMBOCOINUSER${NC}. Then hit ${GREEN}ENTER${NC}."
+read -e PASSWORD
+echo -e "Enter your ${RED}rpcuser${NC} you created in the cold wallet config file. Then hit ${GREEN}ENTER${NC}."
+read -e RPCUSER
+echo -e "Enter your ${RED}rpcpassword${NC} you created in the cold wallet config file. Then hit ${GREEN}ENTER${NC}."
+read -e RPCPASSWORD
+
 echo -e "${GREEN}Prepare to configure and start MamboCoin Masternode.${NC}"
 
 read -p "Mambocoin user: " -i $DEFAULTMAMBOCOINUSER -e MAMBOCOINUSER
 : ${MAMBOCOINUSER:=$DEFAULTMAMBOCOINUSER}
+useradd $MAMBOCOINUSER; echo -e "$PASSWORD\$PASSWORD" | passwd $MAMBOCOINUSER
 useradd -m $MAMBOCOINUSER >/dev/null
 MAMBOCOINHOME=$(sudo -H -u $MAMBOCOINUSER bash -c 'echo $HOME')
 
@@ -142,8 +150,6 @@ read -p "Configuration folder: " -i $DEFAULTMAMBOCOINFOLDER -e MAMBOCOINFOLDER
 : ${MAMBOCOINFOLDER:=$DEFAULTMAMBOCOINFOLDER}
 mkdir -p $MAMBOCOINFOLDER
 
-RPCUSER=$(pwgen -s 8 1)
-RPCPASSWORD=$(pwgen -s 15 1)
 cat << EOF > $MAMBOCOIN/$DEFAULTCONFFILE
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
@@ -179,7 +185,7 @@ masternode=1
 staking=0
 gen=0
 masternodeprivkey=$MAMBOCOINKEY
-externalip=$NODEIP:$MAMBOCOINPORT
+masternodeaddr=$NODEIP:$MAMBOCOINPORT
 EOF
 chown -R $MAMBOCOINUSER: $MAMBOCOINFOLDER >/dev/null
 
@@ -199,14 +205,13 @@ if [[ -z $(pidof $DEFAULTMAMBOBINARY) ]]; then
   echo "systemctl start $DEFAULTMAMBOBINARY.service"
   echo "systemctl status $DEFAULTMAMBOBINARY.service"
   echo "less /var/log/syslog"
-  exit 1 
+  exit 1
 fi
 
 echo
 echo -e "======================================================================================================================="
-echo -e "Mambocoin Masternode is up and running as user ${GREEN}$MAMBOCOINUSER${NC} and it is listening on port ${GREEN}$MAMBOCOINPORT${NC}." 
+echo -e "Mambocoin Masternode is up and running as user ${GREEN}$MAMBOCOINUSER${NC} and it is listening on port ${GREEN}$MAMBOCOINPORT${NC}."
 echo -e "Configuration file is: ${RED}$MAMBOCOINFOLDER/$DEFAULTCONFFILE${NC}"
 echo -e "VPS_IP:PORT ${RED}$NODEIP:$MAMBOCOINPORT${NC}"
 echo -e "MASTERNODE PRIVATEKEY is: ${RED}$MAMBOCOINKEY${NC}"
 echo -e "========================================================================================================================"
-
