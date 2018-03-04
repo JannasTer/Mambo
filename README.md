@@ -20,7 +20,7 @@ Shell script to install a [MamboCoin Masternode](http://mambocoin.com) on a Linu
     * Windows:  **C:\Users<YOUR_USER>\Appdata\Roaming\MamboCoin**  
     * Mac:      **~/Library/Application Support/MamboCoin** 
     * Linux:    **~/.MamboCoin**
-11. Replace the **rpcuser, rpcpass and port** fields.
+11. Replace the **rpcuser, rpcpass and port (21410)** fields.
 12. Open the port on your router/firewall
 13. Restart the wallet
 14. Unlock the wallet
@@ -36,7 +36,7 @@ wget -q https://raw.githubusercontent.com/JannasTer/Mambo/master/mambocoin.sh
 
 bash mambocoin.sh
 
-Supply the script all info received from the **Get Config** details
+Supply the script all info received from the **Get Config** details, including the changed **rpcuser, rpcpass and port** fields
 
 ***
 
