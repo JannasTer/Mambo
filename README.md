@@ -4,7 +4,8 @@ Shell script to install a [MamboCoin Masternode](http://mambocoin.com) on a Linu
 ***
 ## Installation:  
 
-wget -q https://raw.githubusercontent.com/zoldur/MamboCoin/master/mambocoin.sh  
+wget -q https://raw.githubusercontent.com/MamboCoin/Mambo/master/mambocoin.sh
+
 bash mambocoin.sh
 ***
 
@@ -12,22 +13,15 @@ bash mambocoin.sh
 
 After the MN is up and running, you need to configure the desktop wallet accordingly. Here are the steps:  
 1. Open the MamboCoin Desktop Wallet.  
-2. Go to RECEIVE and create a New Address: **MN1**  
-3. Send **30000** MAMBO to **MN1**.  
-4. Wait for 20 confirmations.  
-5. Go to **Help -> "Debug Windwow - Console"**  
-6. Type the following command: **masternode outputs**  
-7. Go to **MamboNodes** tab  
-8. Click **Create** and fill the details:  
+2. Go to **MamboNodes** tab click on **My MamboNodes**
+3. Click **Create** and fill the details:  
 * Alias: **MN1**  
 * Address: **VPS_IP:PORT**  
-* Privkey: **Masternode Private Key**  
-* TxHash: **First value from Step 6**  
-* Output index:  **Second value from Step 6**  
-* Reward address: leave blank  
-* Reward %: leave blank  
-9. Click **OK** to add the masternode  
-10. Click **Start All**  
+4. Click **OK** to add the masternode
+5. Click on MN created: **MN1** and click **Copy Address** 
+6. Send **30000** MAMBO to copied address
+7. Wait for **20** confirmations.
+8. Click **Start All** 
 
 ***
 
