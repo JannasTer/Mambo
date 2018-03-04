@@ -53,7 +53,7 @@ Also, if you want to check/start/stop **mambocoind** , run one of the following 
 ```
 systemctl status mambocoind #To check the service is running  
 systemctl start mambocoind #To start mambocoind service  
-systemctl stop mambocoind #To stop cropcpoind service  
+systemctl stop mambocoind #To stop mambocoind service  
 ```
 
 
