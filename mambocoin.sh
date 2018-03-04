@@ -81,9 +81,6 @@ cd $TMP_FOLDER
 echo -e "Clone git repo and compile it. This may take some time. Press a key to continue."
 read -n 1 -s -r -p ""
 git clone https://github.com/MamboCoin/MamboCoin
-cd MamboCoin/src/leveldb
-make clean
-make libmemenv.a libleveldb.a
 cd MamboCoin/src
 make -f makefile.unix
 compile_error MamboCoin
