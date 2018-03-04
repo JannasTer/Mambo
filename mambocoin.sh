@@ -125,18 +125,15 @@ checks
 prepare_system
 compile_mambocoin
 
-#echo -e "Set a password for ${RED}$MAMBOCOINUSER${NC}. Then hit ${GREEN}ENTER${NC}."
-#read -e PASSWORD
 echo -e "Enter your ${RED}rpcuser${NC} you created in the cold wallet config file. Then hit ${GREEN}ENTER${NC}."
 read -e RPCUSER
 echo -e "Enter your ${RED}rpcpassword${NC} you created in the cold wallet config file. Then hit ${GREEN}ENTER${NC}."
 read -e RPCPASSWORD
 
 echo -e "${GREEN}Prepare to configure and start MamboCoin Masternode.${NC}"
-
+echo -e "You can hit enter with following three (3) options to accept defaults... ${GREEN}Mambocoin user${NC}, ${GREEN}Config file folder${NC} and ${GREEN}Port${NC}."
 read -p "Mambocoin user: " -i $DEFAULTMAMBOCOINUSER -e MAMBOCOINUSER
 : ${MAMBOCOINUSER:=$DEFAULTMAMBOCOINUSER}
-#useradd $MAMBOCOINUSER; echo -e "$PASSWORD\$PASSWORD" | passwd $MAMBOCOINUSER
 useradd -m $MAMBOCOINUSER >/dev/null
 MAMBOCOINHOME=$(sudo -H -u $MAMBOCOINUSER bash -c 'echo $HOME')
 
