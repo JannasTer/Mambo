@@ -34,7 +34,7 @@ fi
 function prepare_system() {
 
 echo -e "Prepare the system to install MamboCoin MasterNode."
-apt-get update >/dev/null 2>&1
+apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade >/dev/null 2>&1
 apt install -y software-properties-common >/dev/null 2>&1
 echo -e "${GREEN}Adding bitcoin PPA repository"
 apt-add-repository -y ppa:bitcoin/bitcoin >/dev/null 2>&1
