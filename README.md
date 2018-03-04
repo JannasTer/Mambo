@@ -21,11 +21,11 @@ After the MN is up and running, you need to configure the desktop wallet accordi
     * Windows:  **C:\Users<YOUR_USER>\Appdata\Roaming\MamboCoin**  
     * Mac:      **~/Library/Application Support/MamboCoin** 
     * Linux:    **~/.MamboCoin**
-11. Replace the rpcuser, rpcpass and port field.
+11. Replace the **rpcuser, rpcpass and port** fields.
 12. Open the port on your router/firewall
 13. Restart the wallet
 14. Unlock the wallet
-9.  Click **Start All** 
+15.  Click **Start All** 
 
 ***
 
@@ -34,6 +34,8 @@ After the MN is up and running, you need to configure the desktop wallet accordi
 wget -q https://raw.githubusercontent.com/JannasTer/Mambo/master/mambocoin.sh
 
 bash mambocoin.sh
+
+Supply the script all info received from the **Get Config** details
 
 ***
 
