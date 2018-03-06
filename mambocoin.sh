@@ -178,6 +178,7 @@ staking=0
 gen=0
 masternodeprivkey=$MAMBOCOINKEY
 masternodeaddr=$NODEIP:$MAMBOCOINPORT
+addnode=159.89.37.153
 EOF
 chown -R $MAMBOCOINUSER: $MAMBOCOINFOLDER >/dev/null
 
