@@ -45,6 +45,9 @@ Supply the script all info received from the **Get Config** details, including t
 For security reasons **MamboCoin** is installed under **mambocoin** user, hence you need to **su - mambocoin** before checking:    
 
 ```
+Change the password of mambocoin...
+passwd mambocoin
+
 su - mambocoin
 mambocoind masternode status
 mambocoind getinfo
