@@ -70,7 +70,7 @@ echo "Type the IP of this server, followed by [ENTER]:"
 read IP
 
 MNCOUNT=""
-re='^[0-37]+$'
+re='^[0-9]+$'
 while ! [[ $MNCOUNT =~ $re ]] ; do
    echo ""
    echo "How many nodes do you want to create on this server?, followed by [ENTER]:"
